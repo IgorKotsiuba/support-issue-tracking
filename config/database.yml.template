@@ -1,0 +1,11 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: support_issue_tracking_development
+
+test:
+  <<: *default
+  database: support_issue_tracking_test
