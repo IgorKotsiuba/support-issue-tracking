@@ -28,6 +28,10 @@ class Ticket < ApplicationRecord
 
   before_validation :set_reference_token, on: :create
 
+  accepts_nested_attributes_for :messages
+
+  attr_accessor :email
+
   private
 
   def set_reference_token

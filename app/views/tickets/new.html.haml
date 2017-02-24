@@ -1,0 +1,10 @@
+%h1 New Issue Ticket
+.col-md-6
+  = simple_form_for @ticket do |f|
+    .form-group
+      = f.input_field 'user[first_name]'
+      / = f.input 'user[last_name]'
+      / = f.input 'user[email]'
+      = f.input :subject
+      = f.button :submit, class: 'btn btn-default'
+
