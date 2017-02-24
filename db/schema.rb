@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170223200354) do
     t.string   "reference_number", null: false
     t.integer  "customer_id",      null: false
     t.integer  "manager_id"
-    t.integer  "status",           null: false
+    t.integer  "status_id",        null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["reference_number"], name: "index_tickets_on_reference_number", unique: true, using: :btree
@@ -60,6 +60,4 @@ ActiveRecord::Schema.define(version: 20170223200354) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "messages", "tickets"
-  add_foreign_key "messages", "users"
 end

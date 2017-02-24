@@ -7,7 +7,7 @@
 #  reference_number :string           not null
 #  customer_id      :integer          not null
 #  manager_id       :integer
-#  status           :integer          not null
+#  status_id        :integer          not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -17,8 +17,8 @@
 #
 
 class Ticket < ApplicationRecord
-  belongs_to :customer, foreign_key: :customer_id, class_name: 'User'
-  belongs_to :manager,  foreign_key: :manager_id,  class_name: 'User', optional: true
+  belongs_to :customer, class_name: 'User'
+  belongs_to :manager,  class_name: 'User', optional: true
   belongs_to :status
 
   has_many :messages, dependent: :destroy
@@ -26,7 +26,7 @@ class Ticket < ApplicationRecord
   validates :subject,          presence: true
   validates :reference_number, presence: true, uniqueness: true
 
-  before_validation :set_reference_token
+  before_validation :set_reference_token, on: :create
 
   private
 
