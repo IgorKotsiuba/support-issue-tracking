@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224155058) do
+ActiveRecord::Schema.define(version: 20170225080236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "messages", force: :cascade do |t|
-    t.text    "body",                      null: false
-    t.integer "ticket_id"
-    t.integer "user_id"
-    t.boolean "read",      default: false
+    t.text     "body",                       null: false
+    t.integer  "ticket_id"
+    t.integer  "user_id"
+    t.boolean  "read",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["ticket_id"], name: "index_messages_on_ticket_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
@@ -33,11 +35,14 @@ ActiveRecord::Schema.define(version: 20170224155058) do
   create_table "tickets", force: :cascade do |t|
     t.string   "subject",          null: false
     t.string   "reference_number", null: false
-    t.integer  "customer_id",      null: false
-    t.integer  "manager_id"
+    t.integer  "user_id"
     t.integer  "status_id",        null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "customer_name",    null: false
+    t.string   "customer_email",   null: false
+    t.string   "issue_department"
+    t.index ["customer_email"], name: "index_tickets_on_customer_email", unique: true, using: :btree
     t.index ["reference_number"], name: "index_tickets_on_reference_number", unique: true, using: :btree
   end
 
@@ -53,11 +58,8 @@ ActiveRecord::Schema.define(version: 20170224155058) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.integer  "role",                   default: 0,  null: false
-    t.string   "department"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "first_name",             default: "", null: false
-    t.string   "last_name",              default: "", null: false
     t.string   "username"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

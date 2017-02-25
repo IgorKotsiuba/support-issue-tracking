@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 gem 'devise'
 gem 'simple_form'
+gem 'responders'
 
 group :development, :test do
   gem 'pry-rails'

@@ -14,11 +14,8 @@
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
 #  role                   :integer          default("0"), not null
-#  department             :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  first_name             :string           default(""), not null
-#  last_name              :string           default(""), not null
 #  username               :string
 #
 # Indexes
@@ -31,13 +28,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  enum role: [:customer, :manager, :admin]
+  enum role: [:manager, :admin]
 
   has_many :tickets
-
-  private
-
-  def password_required?
-    super unless customer?
-  end
 end

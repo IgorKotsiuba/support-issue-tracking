@@ -5,32 +5,31 @@
 #  id               :integer          not null, primary key
 #  subject          :string           not null
 #  reference_number :string           not null
-#  customer_id      :integer          not null
-#  manager_id       :integer
+#  user_id          :integer
 #  status_id        :integer          not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  customer_name    :string           not null
+#  customer_email   :string           not null
+#  issue_department :string
 #
 # Indexes
 #
+#  index_tickets_on_customer_email    (customer_email) UNIQUE
 #  index_tickets_on_reference_number  (reference_number) UNIQUE
 #
 
 class Ticket < ApplicationRecord
-  belongs_to :customer, class_name: 'User'
-  belongs_to :manager,  class_name: 'User', optional: true
+  belongs_to :user, optional: true
   belongs_to :status
 
   has_many :messages, dependent: :destroy
 
-  validates :subject,          presence: true
-  validates :reference_number, presence: true, uniqueness: true
+  validates :subject,        presence: true
+  validates :customer_name,  presence: true
+  validates :customer_email, presence: true, uniqueness: true
 
-  before_validation :set_reference_token, on: :create
-
-  accepts_nested_attributes_for :messages
-
-  attr_accessor :email
+  after_validation :set_reference_token, on: :create
 
   private
 
