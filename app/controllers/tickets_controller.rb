@@ -10,11 +10,10 @@ class TicketsController < ApplicationController
     message = @ticket.messages.new(permitted_params[:message])
 
     @ticket.transaction do
-      message.save!
-      @ticket.save!
+      message.save
+      TicketCreationNotifierWorker.perform_async(@ticket.id) if @ticket.save
     end
-
-    respond_with @ticket
+    respond_with(@ticket, location: root_url)
   end
 
   def show

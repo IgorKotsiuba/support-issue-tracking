@@ -13,6 +13,7 @@ gem 'haml-rails'
 gem 'devise'
 gem 'simple_form'
 gem 'responders'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'pry-rails'
