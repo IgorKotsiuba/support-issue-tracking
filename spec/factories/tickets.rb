@@ -16,7 +16,6 @@
 #
 # Indexes
 #
-#  index_tickets_on_customer_email    (customer_email) UNIQUE
 #  index_tickets_on_reference_number  (reference_number) UNIQUE
 #  index_tickets_on_url_token         (url_token) UNIQUE
 #

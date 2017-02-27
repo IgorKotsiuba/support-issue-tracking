@@ -14,6 +14,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'responders'
 gem 'sidekiq'
+gem 'select2-rails'
 
 group :development, :test do
   gem 'pry-rails'

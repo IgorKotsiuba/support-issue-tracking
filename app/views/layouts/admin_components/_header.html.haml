@@ -1,0 +1,11 @@
+%header#header
+  #logo-group
+    %span#logo
+      = link_to root_path do
+        %span
+          %i.fa.fa-globe
+        Home Page
+  - if user_signed_in?
+    .pull-right
+      %span
+        = link_to 'Sign Out', destroy_user_session_path, method: :delete

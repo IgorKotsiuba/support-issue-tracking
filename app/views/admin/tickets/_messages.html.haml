@@ -1,0 +1,14 @@
+.panel.panel-default
+  - ticket.messages.each do |message|
+    .panel-heading
+      %div #{message.author}, says at #{message.created_at.strftime("%-d %B %Y, %H:%M:%S")}
+    .panel-body
+      %div= message.body
+= simple_form_for(ticket.messages.new, url: admin_ticket_messages_path(ticket.id)) do |f|
+  .form-group
+    = select_tag('message[ticket][status_id]', options_for_select(Status.pluck(:name, :id), @ticket.status.name), class: 'form-control')
+  .form-group
+    = select_tag('message[ticket][user_id]', options_for_select(User.pluck(:username, :id), @ticket.user&.username), class: 'form-control')
+  = f.input :body, as: :text
+  = f.button :submit, 'Reply To Customer', class: 'btn btn-default'
+
