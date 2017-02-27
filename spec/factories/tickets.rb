@@ -30,5 +30,13 @@ FactoryGirl.define do
     subject                     { Faker::Lorem.sentence }
     sequence(:reference_number) { Faker::Code.imei }
     issue_department            { Faker::Commerce.department }
+    url_token                   { Faker::Internet.url }
+
+    # after(:build) { |ticket| ticket.class.skip_callback(:validation, :after, :set_reference_token, :set_url_token) }
+
+    trait :without_validations do
+      to_create { |instance| instance.save(validate: false) }
+      url_token 'default'
+    end
   end
 end
