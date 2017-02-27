@@ -1,0 +1,31 @@
+.col-md-6
+  %h1 Issue Ticket
+  %table.table
+    %tr
+      %td
+        %strong Reference number
+      %td= @ticket.reference_number
+    %tr
+      %td
+        %strong Status
+      %td= @ticket.status.name
+    %tr
+      %td
+        %strong Customer name
+      %td= @ticket.customer_name
+    %tr
+      %td
+        %strong Customer email
+      %td= @ticket.customer_email
+    %tr
+      %td
+        %strong Issue department
+      %td= @ticket&.issue_department
+    %tr
+      %td
+        %strong Subject
+      %td= @ticket.subject
+  = link_to 'Update Ticket', edit_ticket_path(@ticket.url_token), class: 'btn btn-success btn-block'
+  %br
+  %div
+    = render 'messages', ticket: @ticket
