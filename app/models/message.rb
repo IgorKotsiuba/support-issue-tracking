@@ -21,4 +21,8 @@ class Message < ApplicationRecord
   belongs_to :user, optional: true
 
   validates :body, presence: true
+
+  def author
+    user_id.present? ? user.username : ticket.customer_name
+  end
 end

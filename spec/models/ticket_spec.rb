@@ -12,11 +12,13 @@
 #  customer_name    :string           not null
 #  customer_email   :string           not null
 #  issue_department :string
+#  url_token        :string           not null
 #
 # Indexes
 #
 #  index_tickets_on_customer_email    (customer_email) UNIQUE
 #  index_tickets_on_reference_number  (reference_number) UNIQUE
+#  index_tickets_on_url_token         (url_token) UNIQUE
 #
 
 require 'rails_helper'

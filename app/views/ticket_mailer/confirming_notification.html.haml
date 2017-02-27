@@ -1,7 +1,7 @@
 %p Dear, #{@ticket.customer_name}!
 %p By this letter we inform you that your ticket request with reference number: #{@ticket.reference_number} have been successfully received by our support team.
 %p Please, feel free to check ticket's history or update it proceeding through the following link:
-= link_to 'Check Ticket History', root_url
+= link_to 'Check Ticket History', ticket_url(@ticket)
 %p Best regards.
 %p Support team.
 

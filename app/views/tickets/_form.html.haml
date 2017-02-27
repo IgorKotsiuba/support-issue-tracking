@@ -1,0 +1,7 @@
+= simple_form_for ticket do |f|
+  = f.input :customer_name
+  = f.input :customer_email
+  = f.input :issue_department
+  = f.input :subject
+  = f.simple_fields_for :message { |message| message.input :body, as: :text } if params[:action]=='new'
+  = f.button :submit, class: 'btn btn-default'

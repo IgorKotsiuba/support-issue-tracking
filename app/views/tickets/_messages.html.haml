@@ -1,0 +1,10 @@
+.panel.panel-default
+  - ticket.messages.each do |message|
+    .panel-heading
+      %div #{message.author}, says at #{message.created_at.strftime("%-d %B %Y, %H:%M:%S")}
+    .panel-body
+      %div= message.body
+= simple_form_for([ticket, ticket.messages.new]) do |f|
+  = f.input :body, as: :text
+  = f.button :submit, class: 'btn btn-default'
+
