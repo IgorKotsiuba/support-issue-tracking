@@ -44,7 +44,7 @@ class Ticket < ApplicationRecord
   end
 
   scope :with_reference_number, ->(reference_number) do
-    where(reference_number: reference_number) if reference_number.present?
+    where(reference_number: reference_number) if reference_number.present? && reference_number != 'Any reference number'
   end
 
   scope :with_subject, ->(subject) { where('subject ILIKE ?', "%#{subject}%") if subject.present? }
@@ -65,16 +65,23 @@ class Ticket < ApplicationRecord
 
   def generate_reference_token
     loop do
-      token = "#{('A'..'Z').to_a.sample(3).join}-#{SecureRandom.hex(1)}-#{('A'..'Z').to_a.sample(3).join}-" \
-              "#{SecureRandom.hex(1)}-#{('A'..'Z').to_a.sample(3).join}"
+      token = "#{random_chars}-#{random_number}-#{random_chars}-#{random_number}-#{random_chars}"
       break token unless Ticket.where(reference_number: token).exists?
     end
   end
 
   def generate_url_token
     loop do
-      token = SecureRandom.urlsafe_base64(30, false)
+      token = SecureRandom.urlsafe_base64(60, false)
       break token unless Ticket.where(url_token: token).exists?
     end
+  end
+
+  def random_chars
+    ('A'..'Z').to_a.sample(3).join
+  end
+
+  def random_number
+    SecureRandom.hex(1)
   end
 end

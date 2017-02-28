@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  root 'landing#show'
-
   devise_for :users, controllers: { sessions: 'admin/sessions' }, only: :sessions
 
-  authenticated :users do
+  authenticated :user do
     root 'admin/tickets#index', as: :authenticated_root
   end
 
+  root 'landing#show'
+
   namespace :admin do
-    resources :tickets, except: [:create, :destroy] do
+    resources :tickets, only: [:index, :show] do
       resources :messages, only: :create
     end
   end

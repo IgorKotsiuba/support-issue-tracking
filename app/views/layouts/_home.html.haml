@@ -5,9 +5,7 @@
         %li.active{:role => "presentation"}
           %a{:href => "#"} Home
         %li{:role => "presentation"}
-          %a{:href => "#"} About
-        %li{:role => "presentation"}
-          %a{:href => "#"} Contact
+          = link_to 'Login As Manager', new_user_session_path
   .jumbotron
     %h1 Support Issue Tracking System
     %p.lead Do not hesitate to contact with us. You only need to create new issue ticket and our support team will do all the best to make you happy :)

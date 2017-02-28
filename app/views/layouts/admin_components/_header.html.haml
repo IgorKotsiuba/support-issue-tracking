@@ -1,11 +1,10 @@
-%header#header
-  #logo-group
-    %span#logo
-      = link_to root_path do
-        %span
-          %i.fa.fa-globe
-        Home Page
-  - if user_signed_in?
-    .pull-right
-      %span
-        = link_to 'Sign Out', destroy_user_session_path, method: :delete
+%nav.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-header
+    .navbar-brand Support Issue Tracking System
+  #bs-example-navbar-collapse-9.collapse.navbar-collapse
+    %ul.nav.navbar-nav
+    - if user_signed_in?
+      %ul.nav.navbar-nav.navbar-right
+        %p.navbar-text= current_user.email
+        %li
+          = link_to('Logout', destroy_user_session_path, method: :delete, class: 'navbar-link')

@@ -4,35 +4,13 @@
       %h1= t('.dashboard')
 .page-content
   .container
-    .row
-      .col-lg-4.col-md-4.col-sm-6.col-xs-12.margin-bottom-10
-        = link_to admin_tickets_path, :class => 'dashboard-stat dashboard-stat-light blue-madison' do
-          .visual
-            %i.fa.fa-money.fa-icon-medium
-          .details
-            .desc
-              = t('.total_checkouts')
-      .col-lg-4.col-md-4.col-sm-6.col-xs-12
-        = link_to admin_tickets_path, :class => 'dashboard-stat dashboard-stat-light red-intense' do
-          .visual
-            %i.fa.fa-shopping-cart
-          .details
-            .desc
-              = t('.total_confirmed_checkouts')
-      .col-lg-4.col-md-4.col-sm-6.col-xs-12
-        = link_to admin_tickets_path, :class => 'dashboard-stat dashboard-stat-light green-haze' do
-          .visual
-            %i.fa.fa-home.fa-icon-medium
-          .details
-            .desc
-              = t('.total_properties')
     = form_tag(admin_tickets_path, method: :get, class: 'form-inline') do
       .form-group
         = select_tag('ticket[status]', options_for_select(['All status'] + Status.pluck(:name)), class: 'form-control')
       .form-group
         = text_field_tag('ticket[subject]', params[:subject], class: 'form-control', placeholder: 'Ticket subject')
       .form-group
-        = select_tag('ticket[reference_number]', options_for_select(@tickets.pluck(:reference_number), params[:reference_number]), class: 'form-control', id: 'ticket-reference-number')
+        = select_tag('ticket[reference_number]', options_for_select(['Any reference number'] + Ticket.pluck(:reference_number), params[:reference_number]), class: 'form-control', id: 'ticket-reference-number')
       .form-group
         = submit_tag 'Search', class: 'btn btn-success'
 
