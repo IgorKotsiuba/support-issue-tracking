@@ -4,9 +4,6 @@
 - Rails 5.0.1
 
 ### Getting started
-* Specification
-To login as manager: http://localhost:3000/users/sign_in
-
 * Execute sidikiq
   ```sh
     $ bundle exec sidekiq
@@ -21,13 +18,15 @@ To login as manager: http://localhost:3000/users/sign_in
   ```sh
     $ cp ./config/database.yml.template ./config/database.yml
   ```
+
 * Database creation
-  ```sh
+  ```ShellSession
     $ bundle exec rails db:create db:migrate
     $ bundle exec rails db:seed
   ```
+
 * How to run the test suite
-  ```sh
+  ```ShellSession
     $ bundle exec rspec spec
   ```
 License
