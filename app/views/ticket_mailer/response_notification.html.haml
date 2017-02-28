@@ -1,0 +1,6 @@
+%p Dear, #{@ticket.customer_name}!
+%p You have received a new message from support team. Please, proceeding through the following link:
+= link_to "#{@ticket.reference_number}", ticket_url(@ticket)
+in order to get more information.
+%p Best regards.
+%p Support team.

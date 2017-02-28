@@ -7,8 +7,7 @@ class Admin::MessagesController < Admin::BaseController
 
     message.transaction do
       message.save
-      # TicketResponseNotifierWorker.perform_async(@ticket.id) if @ticket.update(permitted_params[:ticket])
-      ticket.update(permitted_params[:ticket])
+      TicketResponseNotifierWorker.perform_async(ticket.id) if ticket.update(permitted_params[:ticket])
     end
     respond_with(ticket, location: admin_ticket_path(ticket.id))
   end

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :tickets, except: [:index, :destroy], param: :url_token do
-    resources :messages, only: :create
-  end
+  root 'landing#show'
 
-  devise_for :users, controllers: { sessions: 'admin/sessions' }
+  devise_for :users, controllers: { sessions: 'admin/sessions' }, only: :sessions
+
+  authenticated :users do
+    root 'admin/tickets#index', as: :authenticated_root
+  end
 
   namespace :admin do
     resources :tickets, except: [:create, :destroy] do
@@ -11,5 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'landing#show'
+  resources :tickets, except: [:index, :destroy], param: :url_token do
+    resources :messages, only: :create
+  end
 end
