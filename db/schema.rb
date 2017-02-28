@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20170225080236) do
     t.string   "customer_email",   null: false
     t.string   "issue_department"
     t.string   "url_token",        null: false
-    t.index ["customer_email"], name: "index_tickets_on_customer_email", unique: true, using: :btree
     t.index ["reference_number"], name: "index_tickets_on_reference_number", unique: true, using: :btree
     t.index ["url_token"], name: "index_tickets_on_url_token", unique: true, using: :btree
   end

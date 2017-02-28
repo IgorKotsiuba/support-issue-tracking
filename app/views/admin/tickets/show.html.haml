@@ -1,0 +1,34 @@
+.col-md-6
+  %h1 Issue Ticket
+  %table.table
+    %tr
+      %td
+        %strong Reference number
+      %td= @ticket.reference_number
+    %tr
+      %td
+        %strong Status
+      %td= @ticket.status.name
+    %tr
+      %td
+        %strong Customer name
+      %td= @ticket.customer_name
+    %tr
+      %td
+        %strong Customer email
+      %td= @ticket.customer_email
+    %tr
+      %td
+        %strong Issue department
+      %td= @ticket&.issue_department
+    %tr
+      %td
+        %strong Subject
+      %td= @ticket.subject
+    %tr
+      %td
+        %strong Manager
+      %td= @ticket.user&.username
+  %br
+  %div
+    = render 'messages', ticket: @ticket

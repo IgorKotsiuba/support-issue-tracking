@@ -14,6 +14,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'responders'
 gem 'sidekiq'
+gem 'select2-rails'
 
 group :development, :test do
   gem 'pry-rails'
@@ -29,6 +30,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

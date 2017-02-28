@@ -16,7 +16,6 @@
 #
 # Indexes
 #
-#  index_tickets_on_customer_email    (customer_email) UNIQUE
 #  index_tickets_on_reference_number  (reference_number) UNIQUE
 #  index_tickets_on_url_token         (url_token) UNIQUE
 #
@@ -30,13 +29,11 @@ FactoryGirl.define do
     subject                     { Faker::Lorem.sentence }
     sequence(:reference_number) { Faker::Code.imei }
     issue_department            { Faker::Commerce.department }
-    url_token                   { Faker::Internet.url }
-
-    # after(:build) { |ticket| ticket.class.skip_callback(:validation, :after, :set_reference_token, :set_url_token) }
+    sequence(:url_token)        { Faker::Internet.url }
 
     trait :without_validations do
       to_create { |instance| instance.save(validate: false) }
-      url_token 'default'
+      sequence(:url_token) { Faker::Internet.url }
     end
   end
 end

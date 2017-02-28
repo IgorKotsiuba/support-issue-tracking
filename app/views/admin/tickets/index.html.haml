@@ -1,0 +1,36 @@
+.page-head
+  .container
+    .page-title
+      %h1= t('.dashboard')
+.page-content
+  .container
+    = form_tag(admin_tickets_path, method: :get, class: 'form-inline') do
+      .form-group
+        = select_tag('ticket[status]', options_for_select(['All status'] + Status.pluck(:name)), class: 'form-control')
+      .form-group
+        = text_field_tag('ticket[subject]', params[:subject], class: 'form-control', placeholder: 'Ticket subject')
+      .form-group
+        = select_tag('ticket[reference_number]', options_for_select(['Any reference number'] + Ticket.pluck(:reference_number), params[:reference_number]), class: 'form-control', id: 'ticket-reference-number')
+      .form-group
+        = submit_tag 'Search', class: 'btn btn-success'
+
+    %table.table.table-hover.table-striped
+      %thead
+        %tr
+          %th= t('.reference_number')
+          %th= t('.status')
+          %th= t('.subject')
+          %th= t('.date')
+          %th= t('.manager')
+          %th.text-center= t('.action')
+
+      %tbody
+        - @tickets.each do |ticket|
+          %tr
+            %td= "#{ticket.reference_number}"
+            %td= ticket.status.name
+            %td= ticket.subject
+            %td= ticket.updated_at
+            %td= ticket.user&.username
+            %td.text-center
+              = link_to t('.more_details'), admin_ticket_path(ticket.id), class: 'btn btn-primary btn-sm'
